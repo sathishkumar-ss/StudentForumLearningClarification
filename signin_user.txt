@@ -1,0 +1,41 @@
+<?php
+session_start();
+
+include("connection.php");
+
+
+if(isset($_POST['sign_in'])){
+
+	$registerno = htmlentities(mysqli_real_escape_string($con,$_POST['user_regno']));	
+	$pass2 = htmlentities(mysqli_real_escape_string($con,$_POST['user_upswd2']));
+
+	$select_user = "select * from users where user_regno='$registerno' AND  user_pass2='$pass'";
+	$query = mysqli_query($con,$select_user);
+	$check_user = mysqli_num_rows($query);
+
+	if ($check_user == 1) {
+		$_session['user_regno']=$registerno;
+
+		$update_msg = mysqli_query($con,"UPDATE users SET log_in = 'Online' WHERE user_regno='$email'")
+		
+		$user1 = $_SESSION['user_regno']
+		;
+		$get_user = "select * from users where user_regno='$user1'";
+		$run_user = mysqli_query($con,$get_user);
+		$row = mysqli_fetch_arry($run_user);
+
+		$user_name = $row['user_name'];
+
+		echo "<script>window.open('home.php?user_name=$user_name','_self')</script>";
+	}
+	else{
+		echo "
+              <div class='alert alert-danger'>
+              <strong>"Check Your regno and password</strong>
+		";
+		</div>
+	}
+	}
+}
+
+?>

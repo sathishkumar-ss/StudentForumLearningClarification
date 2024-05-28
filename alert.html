@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script type="text/javascript">
+  $(document).ready(function(){
+
+    $("#send").click(function() {
+      $.get("text.txt",function(data, status){
+        $("#test").html(data);
+        alert(status);
+      })
+    });
+ 
+  });
+</script>
+
+</head>
+<body>
+<button id="send">click</button>
+<p id="test"></p>
+</body>
+</html>
